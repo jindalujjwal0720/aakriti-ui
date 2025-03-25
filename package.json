@@ -23,6 +23,7 @@
     "@storybook/addon-essentials": "^8.6.9",
     "@storybook/addon-mdx-gfm": "^8.6.9",
     "@storybook/addon-onboarding": "^8.6.9",
+    "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/blocks": "^8.6.9",
     "@storybook/experimental-addon-test": "^8.6.9",
     "@storybook/experimental-nextjs-vite": "^8.6.9",
