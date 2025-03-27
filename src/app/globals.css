@@ -1,15 +1,35 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: oklch(59.87% 0.219 259.04);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --ease-in-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.dark {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: oklch(59.87 0.219351 259.0395);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --ease-in-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --ease-in-out-circ: var(--ease-in-out-circ);
 }
 
 @media (prefers-color-scheme: dark) {

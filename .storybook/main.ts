@@ -7,7 +7,7 @@ const config: StorybookConfig = {
     {
       name: "@storybook/addon-essentials",
       options: {
-        docs: false,
+        docs: true,
       },
     },
     "@storybook/addon-onboarding",
