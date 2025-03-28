@@ -20,7 +20,7 @@ const DummyComponent = React.forwardRef<
     )}
     {...props}
   >
-    Click me to see the highlight effect!
+    Click me
   </button>
 ));
 DummyComponent.displayName = "DummyComponent";

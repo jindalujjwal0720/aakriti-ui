@@ -19,7 +19,7 @@ const isAllowedElement = (
   React.isValidElement(element) &&
   (element.type as React.ComponentType).displayName !== "Highlight";
 
-function extractBackgroundColor(computedStyle: CSSStyleDeclaration): string {
+function extractHighlightColor(computedStyle: CSSStyleDeclaration): string {
   const rawColor = computedStyle.backgroundColor?.trim() || "var(--primary)";
 
   const isTransparentOrWhite = (color: string): boolean => {
@@ -67,7 +67,7 @@ export const DefaultHighlightEffect: React.FC<HighlightEffectProps> = ({
     return {
       width: target.offsetWidth,
       height: target.offsetHeight,
-      backgroundColor: extractBackgroundColor(computedStyle),
+      backgroundColor: extractHighlightColor(computedStyle),
       borderRadius: [
         computedStyle.borderTopLeftRadius,
         computedStyle.borderTopRightRadius,

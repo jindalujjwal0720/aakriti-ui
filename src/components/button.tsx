@@ -1,56 +1,121 @@
+/**
+ * Button component
+ * @use Highlight
+ * @dependencies class-variance-authority, jiva:utils/cn
+ */
 import React from "react";
 import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Highlight } from "./highlight";
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   cn(
-    "font-normal cursor-pointer inline-flex items-center focus:animate-focus justify-center gap-2 whitespace-nowrap transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+    "inline-flex items-center justify-center gap-2",
+    "whitespace-nowrap transition-colors cursor-pointer",
+    "disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0",
     "focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-1 focus-visible:ring-offset-background"
   ),
   {
     variants: {
+      kind: { primary: "", danger: "" },
       variant: {
-        default:
-          "text-foreground outline outline-border hover:text-primary hover:outline-primary",
-        primary:
-          "outline-none bg-primary text-primary-foreground hover:bg-primary/90",
-        dashed:
-          "outline outline-dashed outline-border text-foreground hover:text-primary hover:outline-primary",
-        text: "outline-none text-foreground hover:bg-muted",
+        outline: "outline outline-border",
+        filled: "outline-none",
+        dashed: "outline outline-dashed outline-border",
+        ghost: "outline-none",
+        faint: "outline-none",
+        link: "outline-none hover:underline",
       },
       size: {
-        sm: "text-sm px-1.5 py-0.5 rounded",
-        md: "text-sm px-3.5 py-1.5 rounded-md",
-        lg: "text-base px-3.5 py-2 rounded-lg",
+        sm: "h-6 text-sm px-1.5 rounded",
+        md: "h-8 text-sm px-3.5 rounded-md",
+        lg: "h-10 text-base px-3.5 rounded-lg",
       },
-      shape: {
-        circle: "rounded-full",
-        default: "",
-      },
+      shape: { circle: "rounded-full", rect: "" },
     },
+    compoundVariants: [
+      // Primary variants
+      {
+        variant: "outline",
+        kind: "primary",
+        className: "text-foreground hover:text-primary hover:outline-primary",
+      },
+      {
+        variant: "filled",
+        kind: "primary",
+        className: "bg-primary text-primary-foreground hover:bg-primary/90",
+      },
+      {
+        variant: "dashed",
+        kind: "primary",
+        className: "text-foreground hover:text-primary hover:outline-primary",
+      },
+      {
+        variant: "ghost",
+        kind: "primary",
+        className: "text-primary hover:bg-primary/10",
+      },
+      {
+        variant: "faint",
+        kind: "primary",
+        className: "text-primary bg-primary/10 hover:bg-primary/15",
+      },
+      {
+        variant: "link",
+        kind: "primary",
+        className: "text-primary",
+      },
+      // Danger variants
+      {
+        variant: "outline",
+        kind: "danger",
+        className: "text-foreground hover:text-danger hover:outline-danger",
+      },
+      {
+        variant: "filled",
+        kind: "danger",
+        className: "bg-danger text-danger-foreground hover:bg-danger/90",
+      },
+      {
+        variant: "dashed",
+        kind: "danger",
+        className: "text-foreground hover:text-danger hover:outline-danger",
+      },
+      {
+        variant: "ghost",
+        kind: "danger",
+        className: "text-danger hover:bg-danger/10",
+      },
+      {
+        variant: "faint",
+        kind: "danger",
+        className: "text-danger bg-danger/10 hover:bg-danger/15",
+      },
+      {
+        variant: "link",
+        kind: "danger",
+        className: "text-danger",
+      },
+    ],
     defaultVariants: {
-      variant: "default",
+      kind: "primary",
+      variant: "outline",
       size: "md",
-      shape: "default",
+      shape: "rect",
     },
   }
 );
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  icon?: React.ReactNode;
+}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    {
-      children,
-      className,
-      variant = "default",
-      size = "md",
-      shape = "default",
-      ...props
-    },
+    { children, className, kind, variant, size, shape, icon, ...props },
     ref
   ) => {
     return (
@@ -58,9 +123,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <button
           ref={ref}
           {...props}
-          className={cn(buttonVariants({ variant, size, shape, className }))}
+          className={cn(
+            buttonVariants({ kind, variant, size, className }),
+            shape === "circle" && "rounded-full",
+            icon &&
+              !children &&
+              { sm: "w-6", md: "w-8", lg: "w-10" }[size || "md"]
+          )}
         >
-          <span>{children}</span>
+          {icon ? (
+            icon
+          ) : typeof children === "string" ? (
+            <span>{children}</span>
+          ) : (
+            children
+          )}
         </button>
       </Highlight>
     );

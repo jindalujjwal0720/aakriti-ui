@@ -9,6 +9,8 @@
   --primary-foreground: oklch(0.985 0 0);
   --muted: oklch(96.76% 0.0013 286.38);
   --muted-foreground: oklch(55.19% 0.0137 285.94);
+  --danger: oklch(0.67 0.21 24.47);
+  --danger-foreground: oklch(0.985 0 0);
   --border: oklch(0.89 0 0);
 
   --ease-in-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -21,6 +23,8 @@
   --primary-foreground: oklch(0.985 0 0);
   --muted: oklch(96.76% 0.0013 286.38);
   --muted-foreground: oklch(55.19% 0.0137 285.94);
+  --danger: oklch(0.67 0.21 24.47);
+  --danger-foreground: oklch(0.985 0 0);
   --border: oklch(0.89 0 0);
 
   --ease-in-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -36,20 +40,16 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
   --color-border: var(--border);
 
   --ease-in-out-circ: var(--ease-in-out-circ);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  text-underline-offset: 0.1em;
 }
