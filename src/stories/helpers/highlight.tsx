@@ -69,7 +69,7 @@ export const ShakeHighlightEffect: React.FC<HighlightEffectProps> = ({
   );
 };
 
-export const InsetHighlightEffect: React.FC<HighlightEffectProps> = ({
+export const RippleHighlightEffect: React.FC<HighlightEffectProps> = ({
   target,
   cleanup: onRemove,
   event,

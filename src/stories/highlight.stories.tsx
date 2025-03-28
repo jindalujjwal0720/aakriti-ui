@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Highlight, HighlightProps } from "@/components/highlight";
 import React from "react";
-import { InsetHighlightEffect, ShakeHighlightEffect } from "./utils/highlight";
+import {
+  RippleHighlightEffect,
+  ShakeHighlightEffect,
+} from "./helpers/highlight";
 import { cn } from "@/utils/cn";
 
 const DummyComponent = React.forwardRef<
@@ -23,7 +26,7 @@ const DummyComponent = React.forwardRef<
 DummyComponent.displayName = "DummyComponent";
 
 const meta: Meta<typeof Highlight> = {
-  title: "Utils/Highlight",
+  title: "Components/Highlight",
   component: Highlight,
   render: (props: HighlightProps) => (
     <Highlight {...props}>
@@ -71,9 +74,9 @@ export const Shake: Story = {
   },
 };
 
-export const Inset: Story = {
+export const Ripple: Story = {
   args: {
     disabled: false,
-    effect: InsetHighlightEffect,
+    effect: RippleHighlightEffect,
   },
 };

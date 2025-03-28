@@ -11,18 +11,19 @@ export const Portal: React.FC<PortalProps> = ({
   children,
   target = document.body,
 }) => {
-  const portalContainer = React.useMemo(
-    () => document.createElement("div"),
-    []
-  );
+  const portalContainer = React.useMemo(() => {
+    if (target !== document.body) return target;
+    return document.createElement("div");
+  }, [target]);
 
   React.useEffect(() => {
-    target.appendChild(portalContainer);
+    if (target !== document.body) return;
+    document.body.appendChild(portalContainer);
 
     return () => {
       // Only remove if it's still in the DOM
       if (portalContainer.parentNode) {
-        target.removeChild(portalContainer);
+        document.body.removeChild(portalContainer);
       }
     };
   }, [target, portalContainer]);

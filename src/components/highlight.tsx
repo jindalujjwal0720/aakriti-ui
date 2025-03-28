@@ -13,15 +13,10 @@ export interface HighlightProps extends React.HTMLAttributes<HTMLDivElement> {
   effect?: React.FC<HighlightEffectProps>;
 }
 
-const isRefForwardingComponent = (
-  element: React.ReactNode
-): element is React.ReactElement<Record<string, unknown>> =>
-  React.isValidElement(element) && typeof element.type !== "string";
-
 const isAllowedElement = (
   element: React.ReactNode
 ): element is React.ReactElement<Record<string, unknown>> =>
-  isRefForwardingComponent(element) &&
+  React.isValidElement(element) &&
   (element.type as React.ComponentType).displayName !== "Highlight";
 
 function extractBackgroundColor(computedStyle: CSSStyleDeclaration): string {
@@ -95,6 +90,7 @@ export const DefaultHighlightEffect: React.FC<HighlightEffectProps> = ({
           ...prevStyle,
           ...newStyle,
           opacity: 0,
+          backgroundColor: "transparent",
           boxShadow: `0 0 0 6px ${newStyle.backgroundColor}`,
           transition: `box-shadow 400ms var(--ease-in-out-circ), opacity 2000ms var(--ease-in-out-circ)`,
         }));
@@ -160,7 +156,7 @@ const showHighlightEffect = (
   target.prepend(holder);
 
   const removeHolder = () => {
-    holder.remove();
+    // holder.remove();
   };
 
   renderToPortal(
@@ -172,7 +168,7 @@ const showHighlightEffect = (
 export const Highlight = ({
   children,
   disabled,
-  effect: component = DefaultHighlightEffect,
+  effect: EffectComponent = DefaultHighlightEffect,
 }: HighlightProps) => {
   const childNodeRef = React.useRef<HTMLElement | null>(null);
 
@@ -181,18 +177,17 @@ export const Highlight = ({
     if (disabled || !targetElement) return;
 
     const handleHighlightClick = (e: MouseEvent) => {
-      showHighlightEffect(targetElement, component, e);
+      showHighlightEffect(targetElement, EffectComponent, e);
     };
 
     targetElement.addEventListener("click", handleHighlightClick);
     return () => {
       targetElement.removeEventListener("click", handleHighlightClick);
     };
-  }, [component, disabled]);
+  }, [EffectComponent, disabled]);
 
   return !disabled && isAllowedElement(children)
     ? React.cloneElement(children, { ref: childNodeRef })
     : children;
 };
-
 Highlight.displayName = "Highlight";
