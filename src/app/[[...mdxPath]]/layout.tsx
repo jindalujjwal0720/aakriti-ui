@@ -12,7 +12,7 @@ export const metadata = {
 const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>;
 const navbar = (
   <Navbar
-    logo={<b>Aakriti UI</b>}
+    logo={<b>Jiva UI</b>}
     // ... Your additional navbar options
   />
 );

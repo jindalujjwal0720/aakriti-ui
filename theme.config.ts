@@ -1,5 +1,5 @@
 const themeConfig = {
-  logo: "Aakriti UI",
+  logo: "Jiva UI",
   project: {
     link: "https://github.com/your-repo",
   },
