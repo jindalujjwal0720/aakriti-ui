@@ -4,7 +4,7 @@ Jiva UI is an enterprise-class UI design language and React-based implementation
 
 ## For Jiva UI Developers
 
-1. Clone the repository
+1. Fork and Clone the repository
 
 ```bash
 git clone https://github.com/jiva-ui/ui.git

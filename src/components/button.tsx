@@ -20,9 +20,9 @@ export const buttonVariants = cva(
     variants: {
       kind: { primary: "", danger: "" },
       variant: {
-        outline: "outline outline-border",
+        outline: "outline outline-border -outline-offset-1",
         filled: "outline-none",
-        dashed: "outline outline-dashed outline-border",
+        dashed: "outline outline-dashed outline-border -outline-offset-1",
         ghost: "outline-none",
         faint: "outline-none",
         link: "outline-none hover:underline",
@@ -144,3 +144,29 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 Button.displayName = "Button";
+
+export const ButtonGroup = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ children, className, ...props }, ref) => {
+  const childrenCount = React.Children.count(children);
+  const isSingleChild = childrenCount === 1;
+
+  return (
+    <div ref={ref} {...props} className={cn(className, "flex items-center")}>
+      {React.Children.map(children, (child) =>
+        React.isValidElement<HTMLButtonElement>(child)
+          ? React.cloneElement(child, {
+              className: cn(
+                child.props.className,
+                !isSingleChild && "first:rounded-r-none last:rounded-l-none",
+                "[&:not(:first-child)]:rounded-l-none",
+                "[&:not(:last-child)]:rounded-r-none"
+              ),
+            })
+          : child
+      )}
+    </div>
+  );
+});
+ButtonGroup.displayName = "ButtonGroup";

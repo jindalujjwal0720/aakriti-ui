@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from "@/components/button";
-import { Power } from "lucide-react";
+import { Button, ButtonGroup } from "@/components/button";
+import { MoreHorizontal, Power } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -127,5 +127,31 @@ export const DisabledButton: Story = {
     ...defaults,
     children: "Disabled Button",
     disabled: true,
+  },
+};
+
+export const ButtonsGroup: Story = {
+  render: () => {
+    return (
+      <div className="space-y-4">
+        <ButtonGroup>
+          <Button variant="filled">Actions</Button>
+          <Button icon={<MoreHorizontal size={16} />} />
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button variant="outline">Actions</Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button variant="outline">Actions</Button>
+          <Button variant="outline">Dual</Button>
+          <Button variant="outline" icon={<Power size={16} />} />
+          <Button variant="outline" icon={<MoreHorizontal size={16} />} />
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button variant="outline">Actions</Button>
+          <Button variant="dashed" icon={<MoreHorizontal size={16} />} />
+        </ButtonGroup>
+      </div>
+    );
   },
 };
