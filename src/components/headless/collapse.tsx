@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 
 export interface CollapseProps extends React.HTMLProps<HTMLDivElement> {

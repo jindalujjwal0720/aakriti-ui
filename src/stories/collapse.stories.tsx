@@ -19,6 +19,11 @@ const meta: Meta<typeof Collapse> = {
       options: ["accordion", "multiple"],
       control: { type: "radio" },
     },
+    size: {
+      description: "Size of the collapse component",
+      options: ["sm", "md", "lg"],
+      control: { type: "radio" },
+    },
   },
 };
 
@@ -29,6 +34,7 @@ type Story = StoryObj<typeof Collapse>;
 export const Default: Story = {
   args: {
     mode: "multiple",
+    size: "md",
   },
   render: (args) => (
     <Collapse {...args}>
@@ -69,6 +75,32 @@ export const Accordion: Story = {
       <CollapseItem>
         <CollapseTrigger>Item 3</CollapseTrigger>
         <CollapseContent>Content 3</CollapseContent>
+      </CollapseItem>
+    </Collapse>
+  ),
+};
+
+export const MultipleSize: Story = {
+  args: {
+    mode: "multiple",
+  },
+  render: (args) => (
+    <Collapse {...args}>
+      <CollapseItem>
+        <CollapseTrigger>Item 1</CollapseTrigger>
+        <CollapseContent>Content 1</CollapseContent>
+      </CollapseItem>
+      <CollapseItem size="sm">
+        <CollapseTrigger>Item 2</CollapseTrigger>
+        <CollapseContent>Content 2</CollapseContent>
+      </CollapseItem>
+      <CollapseItem size="lg">
+        <CollapseTrigger>Item 3</CollapseTrigger>
+        <CollapseContent>Content 3</CollapseContent>
+      </CollapseItem>
+      <CollapseItem>
+        <CollapseTrigger>Item 4</CollapseTrigger>
+        <CollapseContent>Content 4</CollapseContent>
       </CollapseItem>
     </Collapse>
   ),
