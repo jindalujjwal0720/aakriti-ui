@@ -5,10 +5,10 @@ import {
   CollapseItem,
   CollapseTrigger,
   CollapseContent,
-} from "@/components/headless/collapse";
+} from "@/components/collapse";
 
 const meta: Meta<typeof Collapse> = {
-  title: "Headless/Collapse",
+  title: "Components/Collapse",
   component: Collapse,
   parameters: {
     controls: { expanded: true },
@@ -34,7 +34,11 @@ export const Default: Story = {
     <Collapse {...args}>
       <CollapseItem>
         <CollapseTrigger>Item 1</CollapseTrigger>
-        <CollapseContent>Content 1</CollapseContent>
+        <CollapseContent>
+          A dog is a type of domesticated animal. Known for its loyalty and
+          faithfulness, it can be found as a welcome guest in many households
+          across the world.
+        </CollapseContent>
       </CollapseItem>
       <CollapseItem>
         <CollapseTrigger>Item 2</CollapseTrigger>
